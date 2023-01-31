@@ -4,19 +4,12 @@ import React, { useEffect } from "react"
 
 import { PokemonProps } from "components/Pokemon/Pokemon"
 
-interface PokemonInfo {
-  id: number
-  name: string
-  height: number
-  weight: number
-}
-
 function filterPokemonsByName(pokemons: PokemonProps[], name: string) {
   return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(name.toLowerCase()))
 }
 
 export const Home = () => {
-  const [pokemonList, setPokemonList] = React.useState<PokemonInfo[]>([])
+  const [pokemonList, setPokemonList] = React.useState<PokemonProps[]>([])
   const [filterValue, setFilterValue] = React.useState("")
 
   useEffect(() => {
@@ -37,8 +30,8 @@ export const Home = () => {
     <div>
       <h1 className={styles.title}>Pokedex</h1>
       <div className={styles.pokedex}>
-        {filterPokemonsByName(pokemonList, filterValue).map(pokemon => (
-          <Pokemon name={pokemon.name} id={pokemon.id} key={pokemon.id} />
+        {filterPokemonsByName(pokemonList, filterValue).map(({ id, name, height, weight }) => (
+          <Pokemon name={name} id={id} weight={weight} height={height} key={id} />
         ))}
       </div>
     </div>
