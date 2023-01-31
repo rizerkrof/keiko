@@ -1,25 +1,37 @@
 import styles from "./Home.module.css"
 import { Pokemon } from "components/Pokemon"
 import { Loader } from "components/Loader"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 
 import { PokemonProps } from "components/Pokemon/Pokemon"
 
 export const Home = () => {
-  const [pokemonList, setPokemonList] = React.useState<PokemonProps[]>([])
-  const [isLoading, setIsLoading] = React.useState(true)
+  const [pokemonList, setPokemonList] = useState<PokemonProps[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     const fetchPokemons = async () => {
-      const response = await fetch("http://localhost:8000/pokemons", { headers: { accept: "application/json" } })
-      const pokemonData = await response.json()
-      setPokemonList(pokemonData)
-      setIsLoading(false)
+      try {
+        const response = await fetch("http://localhost:8000/pokemons", { headers: { accept: "application/json" } })
+        const pokemonData = await response.json()
+        setPokemonList(pokemonData)
+        setIsLoading(false)
+      } catch (error) {
+        setError(true)
+      }
     }
     fetchPokemons()
   }, [])
 
   function renderPokemonList() {
+    if (error) {
+      return (
+        <div className={styles.title}>
+          <h1>ERROR trying fetching pokemon :(</h1>
+        </div>
+      )
+    }
     if (isLoading) {
       return <Loader />
     }
