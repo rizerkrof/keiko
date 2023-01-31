@@ -1,11 +1,11 @@
 import styles from "./Pokemon.module.css"
 
-interface Props {
+export interface PokemonProps {
   name: string
   id: number
 }
 
-export const Pokemon = ({ name, id }: Props) => {
+export const Pokemon = ({ name, id }: PokemonProps) => {
   const imageLink: string = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png"
 
   return (
