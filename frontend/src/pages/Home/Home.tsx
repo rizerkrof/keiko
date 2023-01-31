@@ -11,12 +11,6 @@ interface PokemonInfo {
   weight: number
 }
 
-function fetchPokemons() {
-  return fetch("http://localhost:8000/pokemons", { headers: { accept: "application/json" } }).then(response =>
-    response.json(),
-  )
-}
-
 function filterPokemonsByName(pokemons: PokemonProps[], name: string) {
   return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(name.toLowerCase()))
 }
@@ -26,8 +20,13 @@ export const Home = () => {
   const [filterValue, setFilterValue] = React.useState("")
 
   useEffect(() => {
-    fetchPokemons().then(pokemonData => setPokemonList(pokemonData))
-  })
+    const fetchPokemons = async () => {
+      const response = await fetch("http://localhost:8000/pokemons", { headers: { accept: "application/json" } })
+      const pokemonData = await response.json()
+      setPokemonList(pokemonData)
+    }
+    fetchPokemons()
+  }, [])
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value)
