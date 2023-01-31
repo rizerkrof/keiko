@@ -1,8 +1,14 @@
 import styles from "./Home.module.css"
 import { Pokemon } from "components/Pokemon"
-import React from "react"
+import React, { useEffect } from "react"
 
 import { PokemonProps } from "components/Pokemon/Pokemon"
+
+function fetchPokemons() {
+  return fetch("http://localhost:8000/pokemons", { headers: { accept: "application/json" } }).then(response =>
+    response.json(),
+  )
+}
 
 function filterPokemonsByName(pokemons: PokemonProps[], name: string) {
   return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(name.toLowerCase()))
