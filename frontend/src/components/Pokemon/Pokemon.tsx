@@ -9,7 +9,7 @@ export const Pokemon = ({ name, id }: PokemonProps) => {
   const imageLink: string = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png"
 
   return (
-    <div className={styles.intro}>
+    <div className={styles.card}>
       <img src={imageLink} alt="" />
 
       <p>Name: {name}</p>
