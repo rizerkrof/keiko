@@ -2,6 +2,12 @@ import styles from "./Home.module.css"
 import { Pokemon } from "components/Pokemon"
 import React from "react"
 
+import { PokemonProps } from "components/Pokemon/Pokemon"
+
+function filterPokemonsByName(pokemons: PokemonProps[], name: string) {
+  return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(name.toLowerCase()))
+}
+
 export const Home = () => {
   const pokemonList = [
     {
@@ -27,7 +33,7 @@ export const Home = () => {
   return (
     <div>
       <input className={styles.input} onChange={onInputChange} value={filterValue} />
-      {pokemonList.map(pokemon => (
+      {filterPokemonsByName(pokemonList, filterValue).map(pokemon => (
         <Pokemon name={pokemon.name} id={pokemon.id} key={pokemon.id} />
       ))}
     </div>
