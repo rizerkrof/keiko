@@ -28,7 +28,7 @@ export const Pokemon = () => {
   useEffect(() => {
     const fetchPokemons = async () => {
       try {
-        const response = await fetch("http://localhost:8000/pokemon/" + id, { headers: { accept: "application/json" } })
+        const response = await fetch(`http://localhost:8000/pokemon/${id}`, { headers: { accept: "application/json" } })
         if (response.status !== 200) {
           setError(true)
         }

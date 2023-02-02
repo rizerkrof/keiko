@@ -2,9 +2,12 @@ import { useState, useEffect } from "react"
 import styles from "./PokemonLayout.module.css"
 import { Pokemon, PokemonProps } from "components/Pokemon/Pokemon"
 import { Loader } from "components/Loader"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
-export const PokemonLayout = () => {
+interface PokemonLayoutProps {
+  page: number
+}
+export const PokemonLayout = ({page}: PokemonLayoutProps) => {
   const [pokemonList, setPokemonList] = useState<PokemonProps[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -12,7 +15,7 @@ export const PokemonLayout = () => {
   useEffect(() => {
     const fetchPokemons = async () => {
       try {
-        const response = await fetch("http://localhost:8000/pokemons", { headers: { accept: "application/json" } })
+        const response = await fetch(`http://localhost:8000/pokemons?page=${page}`, { headers: { accept: "application/json" } })
         if (response.status !== 200) {
           setError(true)
         }
@@ -26,7 +29,7 @@ export const PokemonLayout = () => {
       }
     }
     fetchPokemons()
-  }, [])
+  }, [page])
 
   if (isLoading) {
     return <Loader />
