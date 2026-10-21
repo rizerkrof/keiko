@@ -1,0 +1,5 @@
+.logo {
+  display: flex;
+  align-content: space-around;
+  flex-direction: column;
+}
