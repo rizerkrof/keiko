@@ -1,14 +1,12 @@
-.intro {
-  font-size: 20px;
+.pokedex {
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+  gap: 50px 50px;
 }
 
-.input {
-  border-width: 2px;
-  border-style: inset;
-  border-color: rgb(118, 118, 118);
-  border-image: initial;
+.title {
+  text-align: center;
 }
