@@ -8,7 +8,7 @@ export interface PokemonProps {
 }
 
 export const Pokemon = ({ id, name, height, weight }: PokemonProps) => {
-  const imageLink: string = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png"
+  const imageLink: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
 
   return (
     <div className={styles.card}>
