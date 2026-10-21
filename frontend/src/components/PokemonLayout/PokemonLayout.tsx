@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import styles from "./PokemonLayout.module.css"
 import { Pokemon, PokemonProps } from "components/Pokemon/Pokemon"
 import { Loader } from "components/Loader"
+import { Link } from "react-router-dom"
 
 export const PokemonLayout = () => {
   const [pokemonList, setPokemonList] = useState<PokemonProps[]>([])
@@ -37,10 +38,19 @@ export const PokemonLayout = () => {
       </div>
     )
   }
+
+  const linkStyle = {
+    margin: "1rem",
+    textDecoration: "none",
+    color: "black",
+  }
+
   return (
     <div className={styles.pokedex}>
       {pokemonList.map(({ id, name, height, weight }) => (
-        <Pokemon name={name} id={id} weight={weight} height={height} key={id} />
+        <Link to={`/pokemon/${id}`} style={linkStyle} key={id}>
+          <Pokemon name={name} id={id} weight={weight} height={height} />
+        </Link>
       ))}
     </div>
   )
